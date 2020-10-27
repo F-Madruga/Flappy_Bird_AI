@@ -40,3 +40,7 @@ function keyPressed() {
     bird.up();
   }
 }
+
+function mouseClicked() {
+  bird.up();
+}
