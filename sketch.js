@@ -11,7 +11,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(135, 206, 250);
 
   // Draw the pipes, remove offscreen pipes and check if pipe hit the bird
   for (var i = pipes.length - 1; i >= 0 ; i--) {

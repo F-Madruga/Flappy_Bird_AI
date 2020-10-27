@@ -13,7 +13,7 @@ function Bird() {
   }
 
   this.show = () => {
-    fill(255);
+    fill(255, 255, 0);
     ellipse(this.x, this.y, BIRD_WIDTH, BIRD_HEIGHT);
   }
 
