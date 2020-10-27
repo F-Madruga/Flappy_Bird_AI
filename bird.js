@@ -3,21 +3,23 @@ const BIRD_HEIGHT = 32;
 const GRAVITY = 0.6;
 const LIFT = -10;
 
-function Bird() {
-  this.y = height / 2;
-  this.x = 64;
-  this.velocity = 0;
+class Bird {
+  constructor() {
+    this.y = height / 2;
+    this.x = 64;
+    this.velocity = 0; 
+  }
 
-  this.up = () => {
+  up() {
     this.velocity = LIFT;
   }
 
-  this.show = () => {
+  show() {
     fill(255, 255, 0);
     ellipse(this.x, this.y, BIRD_WIDTH, BIRD_HEIGHT);
   }
 
-  this.update = () => {
+  update() {
     this.velocity += GRAVITY;
     this.y += this.velocity;
 
