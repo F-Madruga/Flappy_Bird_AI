@@ -1,19 +1,17 @@
-const PIPE_WIDTH = 50;
-const PIPE_SPACING = 130;
-const PIPE_SPEED = 3;
-
 class Pipe {
   constructor() {
+    this.x = width;
     this.topHeight = random(height / 6, (3 / 4) * height);
     this.bottomHeight = height - this.topHeight - PIPE_SPACING;
-    this.x = width;
+    this.width = PIPE_WIDTH;
+    this.speed = PIPE_SPEED;
     this.highlight = false;
   }
   
 
   hits(bird) {
-    if (bird.y < this.topHeight || bird.y > height - this.bottomHeight) {
-      if (bird.x > this.x && bird.x < this.x + PIPE_WIDTH) {
+    if (bird.y - (bird.height / 2) < this.topHeight || bird.y + (bird.height / 2) > height - this.bottomHeight) {
+      if (bird.x + (bird.width / 2) > this.x && bird.x - (bird.width / 2) < this.x + this.width) {
         this.highlight = true;
         return true;
       }
@@ -27,15 +25,15 @@ class Pipe {
     if (this.highlight) {
       fill(255, 0, 0);
     }
-    rect(this.x, 0, PIPE_WIDTH, this.topHeight);
-    rect(this.x, height - this.bottomHeight, PIPE_WIDTH, this.bottomHeight);
+    rect(this.x, 0, this.width, this.topHeight);
+    rect(this.x, height - this.bottomHeight, this.width, this.bottomHeight);
   }
 
   update() {
-    this.x -= PIPE_SPEED;
+    this.x -= this.speed;
   }
 
   offScreen() {
-    return this.x < -PIPE_WIDTH;
+    return this.x < -this.width;
   }
 }

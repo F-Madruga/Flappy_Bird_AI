@@ -1,37 +1,36 @@
-const BIRD_WIDTH = 32;
-const BIRD_HEIGHT = 32;
-const GRAVITY = 0.6;
-const LIFT = -10;
-
 class Bird {
   constructor() {
     this.y = height / 2;
     this.x = 64;
     this.velocity = 0; 
+    this.width = BIRD_WIDTH;
+    this.height = BIRD_HEIGHT;
+    this.lift = LIFT;
+    this.gravity = GRAVITY;
   }
 
   up() {
-    this.velocity = LIFT;
+    this.velocity = this.lift;
   }
 
   show() {
     fill(255, 255, 0);
-    ellipse(this.x, this.y, BIRD_WIDTH, BIRD_HEIGHT);
+    ellipse(this.x, this.y, this.width, this.height);
   }
 
   update() {
-    this.velocity += GRAVITY;
+    this.velocity += this.gravity;
     this.y += this.velocity;
 
     // Check if bird is on the bottom of window
-    if (this.y > height - (BIRD_HEIGHT / 2)) {
-      this.y = height - (BIRD_HEIGHT / 2);
+    if (this.y > height - (this.height / 2)) {
+      this.y = height - (this.height / 2);
       this.velocity = 0;
     }
 
     // Check if bird is on the top of window
-    if (this.y < (BIRD_HEIGHT / 2)) {
-      this.y = (BIRD_HEIGHT / 2);
+    if (this.y < (this.height / 2)) {
+      this.y = (this.height / 2);
       this.velocity = 0;
     }
   }

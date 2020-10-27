@@ -1,3 +1,13 @@
+// Bird config
+const BIRD_WIDTH = 32;
+const BIRD_HEIGHT = 32;
+const GRAVITY = 0.6;
+const LIFT = -10;
+
+// Pipes config
+const PIPE_WIDTH = 50;
+const PIPE_SPACING = 130;
+const PIPE_SPEED = 3;
 const FRAMES_PER_PIPE = 80;
 
 var bird;
