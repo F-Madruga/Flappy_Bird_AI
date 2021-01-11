@@ -36,6 +36,7 @@ function draw() {
   };
 
   // Draw the bird
+  bird.think(pipes);
   bird.update();
   bird.show();
 
