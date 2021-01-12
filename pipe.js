@@ -32,7 +32,7 @@ class Pipe {
         return true;
       }
     }
-    this.highlight = false;
+    //this.highlight = false;
     return false;
   }
 
