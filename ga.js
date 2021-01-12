@@ -11,6 +11,9 @@ function nextGeneration() {
   normalizeFitness(allBirds);
   activeBirds = generate(allBirds);
   allBirds = activeBirds.slice();
+  gen += 1;
+  genSpan.html(gen);
+  activeBirdsSpan.html(activeBirds.length);
 }
 
 function generate(oldBirds) {

@@ -10,14 +10,21 @@ let counter = 0;
 let speedSlider;
 let speedSpan;
 let highScoreSpan;
+let activeBirdsSpan;
+let genSpan;
 let allTimeHighScoreSpan;
 
 // All time high score
 let highScore = 0;
+let gen = 0;
 
 // Training or just showing the current best
 let runBest = false;
 let runBestButton;
+
+let populationInput;
+let mutationRateInput;
+let restartButton;
 
 function setup() {
   let canvas = createCanvas(WIDTH, HEIGHT);
@@ -28,8 +35,15 @@ function setup() {
   speedSpan = select('#speed');
   highScoreSpan = select('#hs');
   allTimeHighScoreSpan = select('#ahs');
+  activeBirdsSpan = select('#activeBirds');
+  genSpan = select('#gen');
   runBestButton = select('#best');
   runBestButton.mousePressed(toggleState);
+
+  populationInput = select('#population');
+  mutationRateInput = select('#mutation');
+  restartButton = select('#restart');
+  restartButton.mousePressed(restart);
 
   // Creation of population
   for (let i = 0; i < POPULATION_SIZE; i++) {
@@ -37,6 +51,7 @@ function setup() {
     activeBirds[i] = bird;
     allBirds[i] = bird;
   }
+  activeBirdsSpan.html(activeBirds.length);
 }
 
 function toggleState() {
@@ -44,12 +59,43 @@ function toggleState() {
   // Show the best bird
   if (runBest) {
     resetGame();
-    runBestButton.html('continue training');
+    runBestButton.html('Continue training');
+    activeBirdsSpan.html(1);
     // Show training
   } else {
     nextGeneration();
-    runBestButton.html('run best');
+    runBestButton.html('Run all time best');
+    activeBirdsSpan.html(activeBirds.length);
   }
+}
+
+function restart() {
+  if (!populationInput.value()) {
+    populationInput.value(POPULATION_SIZE);
+  }
+  if (!mutationRateInput.value()) {
+    mutationRateInput.value(MUTATION_RATE);
+  }
+  POPULATION_SIZE = parseInt(populationInput.value());
+  MUTATION_RATE = parseFloat(mutationRateInput.value());
+
+  bestBird = null;
+  activeBirds = [];
+  allBirds = [];
+  runBest = false;
+  highScore = 0;
+  gen = 0;
+  genSpan.html(gen);
+  highScoreSpan.html(highScore);
+  allTimeHighScoreSpan.html(highScore);
+  for (let i = 0; i < POPULATION_SIZE; i++) {
+    let bird = new Bird();
+    activeBirds[i] = bird;
+    allBirds[i] = bird;
+  }
+  activeBirdsSpan.html(activeBirds.length);
+  counter = 0;
+  pipes = [];
 }
 
 
@@ -91,6 +137,7 @@ function draw() {
         for (let j = 0; j < pipes.length; j++) {
           if (pipes[j].hits(activeBirds[i])) {
             activeBirds.splice(i, 1);
+            activeBirdsSpan.html(activeBirds.length);
             break;
           }
         }
